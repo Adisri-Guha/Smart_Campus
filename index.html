@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartCampus - College Facilities & Navigation Prototype</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement / Disclaimer Notice -->
+  <aside class="demo-banner" role="alert">
+    <div class="banner-inner container">
+      <span class="banner-badge">Prototype Demo</span>
+      <p>
+        <strong>Notice:</strong> Facility statuses, routes, and bookings are simulated mock data for hackathon evaluation and are not linked to live campus infrastructure or GPS systems.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header" id="top">
+    <div class="container header-container">
+      <a href="#top" class="brand-logo" aria-label="SmartCampus Home">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Smart<strong>Campus</strong></span>
+          <span class="brand-sub">Hackathon Portal</span>
+        </div>
+      </a>
+
+      <!-- Mobile Navigation Hamburger -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- Nav Links -->
+      <nav class="site-nav" id="siteNav">
+        <ul class="nav-list">
+          <li><a href="#overview" class="nav-link">Overview</a></li>
+          <li><a href="#facilities" class="nav-link">Facilities</a></li>
+          <li><a href="#routes" class="nav-link">Route Finder</a></li>
+          <li><a href="#status" class="nav-link">Live Status</a></li>
+          <li><a href="#booking" class="nav-link">Book Slot</a></li>
+          <li>
+            <a href="#my-bookings" class="nav-link booking-badge-link">
+              My Bookings <span class="nav-badge" id="navBookingCount">0</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main id="main-content">
+
+    <!-- Hero Section / Overview -->
+    <section class="hero-section" id="overview">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="pulse-dot"></span>
+            Smart College Experience
+          </div>
+          <h1 class="hero-title">
+            Navigate, Explore & Reserve <span class="text-gradient">Campus Facilities</span> in One Spot
+          </h1>
+          <p class="hero-description">
+            SmartCampus simplifies college life. Discover opening hours, check current crowd conditions, find step-by-step walking routes, and reserve study stations without the hassle.
+          </p>
+          <div class="hero-actions">
+            <a href="#facilities" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              Explore Facilities
+            </a>
+            <a href="#routes" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              Find Sample Route
+            </a>
+          </div>
+
+          <!-- Live quick metrics -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">6</span>
+              <span class="stat-label">Key Facilities</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Accessible Routes</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Daily Time Slots</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card-preview">
+          <div class="preview-glass-card">
+            <div class="preview-header">
+              <div class="preview-badge"><span class="status-indicator open"></span> 4 Facilities Open</div>
+              <span class="preview-time" id="liveClock">--:-- --</span>
+            </div>
+            <div class="preview-body">
+              <div class="mini-facility-item">
+                <div class="mini-icon">📚</div>
+                <div class="mini-info">
+                  <strong>Central Library</strong>
+                  <span>Main Quad • Open</span>
+                </div>
+                <span class="status-pill pill-open">Open</span>
+              </div>
+              <div class="mini-facility-item">
+                <div class="mini-icon">💻</div>
+                <div class="mini-info">
+                  <strong>Computer Lab</strong>
+                  <span>Tech Block 2nd Fl • Open</span>
+                </div>
+                <span class="status-pill pill-open">Open</span>
+              </div>
+              <div class="mini-facility-item">
+                <div class="mini-icon">⚽</div>
+                <div class="mini-info">
+                  <strong>Sports Ground</strong>
+                  <span>East Campus • Busy</span>
+                </div>
+                <span class="status-pill pill-busy">Busy</span>
+              </div>
+            </div>
+            <div class="preview-footer">
+              <a href="#booking" class="preview-cta">Reserve a desk for today &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facility Directory Section with Search -->
+    <section class="section" id="facilities">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-subtitle">Campus Directory</span>
+          <h2 class="section-title">Explore Campus Facilities</h2>
+          <p class="section-lead">
+            Search or filter through primary student hubs. View live status, check location notes, or jump directly to route directions and reservations.
+          </p>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="search-filter-panel">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input 
+              type="text" 
+              id="facilitySearchInput" 
+              class="search-input" 
+              placeholder="Search facilities (e.g., Library, Lab, Mess, Sports)..." 
+              autocomplete="off"
+              aria-label="Search campus facilities"
+            >
+            <button type="button" id="clearSearchBtn" class="clear-search-btn" title="Clear search" aria-label="Clear search">✕</button>
+          </div>
+
+          <div class="filter-pills" id="filterPills" role="radiogroup" aria-label="Filter facilities by status">
+            <button type="button" class="filter-pill active" data-filter="all">All (6)</button>
+            <button type="button" class="filter-pill" data-filter="Open">Open</button>
+            <button type="button" class="filter-pill" data-filter="Available">Available</button>
+            <button type="button" class="filter-pill" data-filter="Busy">Busy</button>
+          </div>
+        </div>
+
+        <!-- Search Results Count and Feedback -->
+        <div class="search-meta" id="searchMeta">
+          Showing <span id="facilityCount">6</span> facilities
+        </div>
+
+        <!-- Facility Cards Grid -->
+        <div class="facility-grid" id="facilityGrid">
+          <!-- Populated dynamically via script.js -->
+        </div>
+
+        <!-- No results template -->
+        <div class="no-results hidden" id="noResultsState">
+          <div class="empty-icon">🔍</div>
+          <h3>No matching facilities found</h3>
+          <p>Try searching with another keyword or resetting the filters.</p>
+          <button type="button" class="btn btn-outline" id="resetFilterBtn">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Route Finder / Navigation Section -->
+    <section class="section section-muted" id="routes">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Wayfinding</span>
+          <h2 class="section-title">Campus Route Finder</h2>
+          <p class="section-lead">
+            Select a starting location and destination to view step-by-step illustrative walking paths across campus grounds.
+          </p>
+        </div>
+
+        <div class="route-finder-card">
+          <!-- Route Controls -->
+          <div class="route-controls-grid">
+            <div class="form-group">
+              <label for="routeOrigin" class="form-label">
+                <span class="label-icon origin-dot"></span> Starting Location
+              </label>
+              <select id="routeOrigin" class="form-select">
+                <option value="Main Gate" selected>Main Campus Gate (South Entry)</option>
+                <option value="Hostel Block A">Hostel Block A (North Residences)</option>
+                <option value="Academic Block">Academic Block (Central Wing)</option>
+                <option value="Admin Block">Administration Building</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="routeDestination" class="form-label">
+                <span class="label-icon dest-dot"></span> Destination Facility
+              </label>
+              <select id="routeDestination" class="form-select">
+                <option value="Library" selected>Library (Central Library Building)</option>
+                <option value="Computer Lab">Computer Lab (Technology Block)</option>
+                <option value="Main Mess">Main Mess (Dining Hall Complex)</option>
+                <option value="Medical Centre">Medical Centre (Health & First Aid)</option>
+                <option value="Sports Ground">Sports Ground (Athletic Pavilion)</option>
+                <option value="Study Room">Study Room (Student Resource Wing)</option>
+              </select>
+            </div>
+
+            <div class="form-group route-action-wrapper">
+              <label class="form-label desktop-only-label">&nbsp;</label>
+              <button type="button" id="getRouteBtn" class="btn btn-primary btn-block">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                Find Route
+              </button>
+            </div>
+          </div>
+
+          <!-- Route Disclaimer -->
+          <div class="route-disclaimer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span><strong>Example Route:</strong> The path below is an illustrative sample for prototype demonstration and is not connected to live GPS or official campus engineering blueprints.</span>
+          </div>
+
+          <!-- Dynamic Route Output -->
+          <div class="route-result-box" id="routeResultBox">
+            <!-- Populated via script.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Facility Status Summary Section -->
+    <section class="section" id="status">
+      <div class="container">
+        <div class="section-header">
+          <div class="header-with-action">
+            <div>
+              <span class="section-subtitle">Real-Time Overview</span>
+              <h2 class="section-title">Facility Live Status</h2>
+              <p class="section-lead">
+                Current operational hours and occupancy levels across student-accessible campus locations.
+              </p>
+            </div>
+            <button type="button" id="refreshStatusBtn" class="btn btn-outline btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="refreshIcon"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Simulate Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Status Cards / Table Display -->
+        <div class="status-table-container">
+          <table class="status-table" aria-label="Campus facilities status table">
+            <thead>
+              <tr>
+                <th scope="col">Facility Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Operating Hours</th>
+                <th scope="col">Occupancy Estimate</th>
+                <th scope="col">Location</th>
+                <th scope="col" class="text-right">Quick Action</th>
+              </tr>
+            </thead>
+            <tbody id="statusTableBody">
+              <!-- Populated by script.js -->
+            </tbody>
+          </table>
+        </div>
+        
+        <p class="status-footnote">
+          * Statuses are simulated demonstration values. During active campus sessions, these connect to IoT turnstiles and building management systems.
+        </p>
+      </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section class="section section-muted" id="booking">
+      <div class="container">
+        <div class="booking-grid">
+          
+          <!-- Booking Information Sidebar -->
+          <div class="booking-info-panel">
+            <span class="section-subtitle">Easy Reservation</span>
+            <h2 class="section-title">Book a Campus Facility Slot</h2>
+            <p class="section-lead">
+              Reserve your access to study desks, high-performance labs, or recreation facilities ahead of time to avoid peak-hour queues.
+            </p>
+
+            <div class="info-card-list">
+              <div class="info-card">
+                <div class="info-card-icon">⚡</div>
+                <div>
+                  <strong>Instant Confirmation</strong>
+                  <p>Session-based pass generated immediately upon submission.</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-icon">🕒</div>
+                <div>
+                  <strong>Standard 1-Hour Windows</strong>
+                  <p>Slots: 10 AM–11 AM, 11 AM–12 PM, and 2 PM–3 PM.</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-card-icon">🛡️</div>
+                <div>
+                  <strong>Fair Student Use</strong>
+                  <p>Guaranteed seating for individual research and collaborative teams.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="prototype-card-notice">
+              <strong>Hackathon Note:</strong>
+              This form verifies input syntax and creates local session bookings. No personal database record is permanently retained.
+            </div>
+          </div>
+
+          <!-- Booking Form Card -->
+          <div class="booking-form-card">
+            <h3 class="form-title">Reserve Your Slot</h3>
+            <p class="form-subtitle">Fill out the details below to generate a temporary pass.</p>
+
+            <!-- Alert Container for Success / Errors -->
+            <div id="bookingAlert" class="alert-box hidden" role="alert"></div>
+
+            <form id="facilityBookingForm" novalidate>
+              
+              <!-- Student Name -->
+              <div class="form-group">
+                <label for="studentName" class="form-label">
+                  Student Full Name <span class="required">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="studentName" 
+                  name="studentName" 
+                  class="form-input" 
+                  placeholder="e.g., Alex Johnson" 
+                  required
+                >
+                <div class="input-error" id="nameError"></div>
+              </div>
+
+              <!-- Student Roll / ID -->
+              <div class="form-group">
+                <label for="studentId" class="form-label">
+                  Student Roll / ID Number <span class="required">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="studentId" 
+                  name="studentId" 
+                  class="form-input" 
+                  placeholder="e.g., CS-2026-4421" 
+                  required
+                >
+                <div class="input-error" id="idError"></div>
+              </div>
+
+              <!-- Facility Selection -->
+              <div class="form-group">
+                <label for="bookingFacility" class="form-label">
+                  Select Facility <span class="required">*</span>
+                </label>
+                <select id="bookingFacility" name="bookingFacility" class="form-select" required>
+                  <option value="" disabled selected>-- Choose a Facility --</option>
+                  <option value="Library">Library (Silent Study & Reading)</option>
+                  <option value="Computer Lab">Computer Lab (Workstations & GPUs)</option>
+                  <option value="Study Room">Study Room (Group Discussion Desk)</option>
+                  <option value="Sports Ground">Sports Ground (Badminton & Track)</option>
+                  <option value="Main Mess">Main Mess (Meal Table Reservation)</option>
+                  <option value="Medical Centre">Medical Centre (Health Consultation)</option>
+                </select>
+                <div class="input-error" id="facilityError"></div>
+              </div>
+
+              <!-- Time Slot -->
+              <div class="form-group">
+                <label for="bookingSlot" class="form-label">
+                  Available Time Slot <span class="required">*</span>
+                </label>
+                <select id="bookingSlot" name="bookingSlot" class="form-select" required>
+                  <option value="" disabled selected>-- Choose Time Slot --</option>
+                  <option value="10 AM–11 AM">10:00 AM – 11:00 AM (Morning Slot 1)</option>
+                  <option value="11 AM–12 PM">11:00 AM – 12:00 PM (Morning Slot 2)</option>
+                  <option value="2 PM–3 PM">2:00 PM – 3:00 PM (Afternoon Slot)</option>
+                </select>
+                <div class="input-error" id="slotError"></div>
+              </div>
+
+              <!-- Booking Date -->
+              <div class="form-group">
+                <label for="bookingDate" class="form-label">
+                  Date of Visit <span class="required">*</span>
+                </label>
+                <input 
+                  type="date" 
+                  id="bookingDate" 
+                  name="bookingDate" 
+                  class="form-input" 
+                  required
+                >
+                <div class="input-error" id="dateError"></div>
+              </div>
+
+              <!-- Purpose / Notes (Optional) -->
+              <div class="form-group">
+                <label for="bookingNotes" class="form-label">
+                  Purpose / Notes <span class="optional">(Optional)</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="bookingNotes" 
+                  name="bookingNotes" 
+                  class="form-input" 
+                  placeholder="e.g., Final Year Project discussion or individual study"
+                >
+              </div>
+
+              <!-- Prototype confirmation checkbox -->
+              <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="demoConsent" required>
+                  <span>I understand this is a sample prototype booking and not a live campus system pass.</span>
+                </label>
+                <div class="input-error" id="consentError"></div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="submitBookingBtn" class="btn btn-primary btn-block">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Confirm & Create Booking
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Session Bookings Section -->
+    <section class="section" id="my-bookings">
+      <div class="container">
+        <div class="section-header">
+          <div class="header-with-action">
+            <div>
+              <span class="section-subtitle">Active Session Passes</span>
+              <h2 class="section-title">My Current Bookings</h2>
+              <p class="section-lead">
+                Review all reservations created during your current browser session. You can cancel or create new slots at any time.
+              </p>
+            </div>
+            <a href="#booking" class="btn btn-primary btn-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Booking
+            </a>
+          </div>
+        </div>
+
+        <!-- Bookings Container -->
+        <div class="session-bookings-container">
+          <div class="bookings-grid" id="bookingsGrid">
+            <!-- Populated via script.js -->
+          </div>
+
+          <!-- Empty State -->
+          <div class="bookings-empty hidden" id="bookingsEmptyState">
+            <div class="empty-icon">🎟️</div>
+            <h3>No Bookings Created Yet</h3>
+            <p>You haven't reserved any facility slots during this session. Use the booking form above to create your first demonstration pass.</p>
+            <a href="#booking" class="btn btn-outline">Go to Booking Form</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="logo-icon small">🎓</div>
+        <div>
+          <span class="footer-title">Smart<strong>Campus</strong> Prototype</span>
+          <p class="footer-desc">Designed & built for collegiate hackathon exhibition.</p>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <a href="#overview">Overview</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#routes">Route Finder</a>
+        <a href="#status">Status</a>
+        <a href="#booking">Bookings</a>
+      </div>
+
+      <div class="footer-disclaimer">
+        <p>
+          ⚠️ <strong>Prototype Disclaimer:</strong> All facilities data, routes, crowd statistics, and reservations shown on this site are illustrative demonstration models created with vanilla HTML, CSS, and JavaScript. No production campus database or live GPS telemetry is connected.
+        </p>
+        <p class="copyright">&copy; 2026 SmartCampus Project Team. Built for Campus Hackathon.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Toast Notification System -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
